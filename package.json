@@ -1,0 +1,33 @@
+{
+  "name": "express-apollo-graphql",
+  "version": "1.0.0",
+  "description": "A GraphQL API with Express, Apollo, JWT, and MariaDB",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "express",
+    "apollo",
+    "graphql",
+    "jwt",
+    "mariadb"
+  ],
+  "author": "mas-diq",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^3.x.x",
+    "dotenv": "^16.x.x",
+    "express": "^4.x.x",
+    "graphql": "^16.x.x",
+    "jsonwebtoken": "^9.x.x",
+    "mariadb": "^3.x.x", 
+    "uuid": "^9.x.x",
+    "sequelize": "^6.x.x",
+    "mysql2": "^3.x.x" 
+  },
+  "devDependencies": {
+    "nodemon": "^3.x.x"
+  }
+}
