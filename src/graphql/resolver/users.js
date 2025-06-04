@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs'); // For password hashing
 const { v4: uuidv4 } = require('uuid');
 const { GraphQLError } = require('graphql');
 const db = require('../../config/database');
-const { generateToken, protectResolver } = require('../../services/auth');
+const { generateToken, protectResolver } = require('../../service/auth');
 
 // Helper function to convert UUID string to Buffer for MariaDB BINARY(16)
 function uuidToBin(uuidString) {

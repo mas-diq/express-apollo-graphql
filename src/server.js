@@ -1,7 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers'); // This will be your combined resolvers
+const resolvers = require('./graphql/resolver'); // This will be your combined resolvers
 const { authenticateContext } = require('./middleware/auth'); // For setting up context
 // const db = require('./config/database'); // Already imported in index.js usually
 
