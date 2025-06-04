@@ -1,0 +1,1249 @@
+{
+	"info": {
+		"_postman_id": "034e858a-850f-4b8f-b355-340fbca01ef2",
+		"name": "Express - Apollo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32171715"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation RegisterUser($input: CreateUserInput!) {\n  registerUser(input: $input) {\n    token\n    user {\n      uuid\n      name\n      email\n      createdAt\n      updatedAt\n    }\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"name\": \"Diq Test\",\n    \"email\": \"diq.test@godigi.com\",\n    \"password\": \"Qwerty123!\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation RegisterUser($input: CreateUserInput!) {\n  registerUser(input: $input) {\n    token\n    user {\n      uuid\n      name\n      email\n      createdAt\n      updatedAt\n    }\n  }\n}",
+										"variables": "{\n  \"input\": {\n    \"name\": \"Diq Test\",\n    \"email\": \"diq.test@godigi.com\",\n    \"password\": \"Qwerty123!\"\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "430"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ae-b8kOmmcSXX3jEpr7FCbiCLdSVkM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 04:35:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"registerUser\": {\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTlmNzc0NC0wM2JhLTRkMzctOWM4My0yODYxOTc2NzI2ZDMiLCJlbWFpbCI6ImRpcS50ZXN0QGdvZGlnaS5jb20iLCJpYXQiOjE3NDkwMTE3MTQsImV4cCI6MTc0OTAxNTMxNH0.OonwvYMDP5keEQahwo1aI0yS74ynPBk-F1-TwAFtbvg\",\n            \"user\": {\n                \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n                \"name\": \"Diq Test\",\n                \"email\": \"diq.test@godigi.com\",\n                \"createdAt\": \"1749011714164\",\n                \"updatedAt\": \"1749011714164\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check if response contains token",
+									"if (pm.response.code === 200) {",
+									"    // Parse the response (adjust based on your API response format)",
+									"    const responseData = pm.response.json();",
+									"",
+									"    // Extract the token (adjust property name based on your API)",
+									"    const token = responseData.data.loginUser.token;",
+									"",
+									"    // Set the token as an environment variable",
+									"    pm.variables.set(\"bearer\", token);",
+									"",
+									"    // Optional: Display a message",
+									"    console.log(\"Token saved:\", token);",
+									"} else {",
+									"    console.log(\"Login failed - token not saved\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation LoginUser($email: String!, $password: String!) {\n  loginUser(email: $email, password: $password) {\n    token\n    user {\n      uuid\n      name\n      email\n      createdAt\n      updatedAt\n    }\n  }\n}",
+								"variables": "{\n  \"email\": \"diq.test@godigi.com\",\n  \"password\": \"Qwerty123!\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation LoginUser($email: String!, $password: String!) {\n  loginUser(email: $email, password: $password) {\n    token\n    user {\n      uuid\n      name\n      email\n      createdAt\n      updatedAt\n    }\n  }\n}",
+										"variables": "{\n  \"email\": \"diq.test@godigi.com\",\n  \"password\": \"Qwerty123!\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "427"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ab-R1vhaQpUlWu6F5CaXSump4h7qaM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 04:36:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"loginUser\": {\n            \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTlmNzc0NC0wM2JhLTRkMzctOWM4My0yODYxOTc2NzI2ZDMiLCJlbWFpbCI6ImRpcS50ZXN0QGdvZGlnaS5jb20iLCJpYXQiOjE3NDkwMTE3NjEsImV4cCI6MTc0OTAxNTM2MX0.gszdAnzdCuD_ESE8T3JBPr3b0ODfBX8kr7I2Vua-WNY\",\n            \"user\": {\n                \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n                \"name\": \"Diq Test\",\n                \"email\": \"diq.test@godigi.com\",\n                \"createdAt\": \"1749011714164\",\n                \"updatedAt\": \"1749011714164\"\n            }\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetAllUsers {\n  getAllUsers {\n    uuid\n    name\n    email\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetAllUsers {\n  getAllUsers {\n    uuid\n    name\n    email\n  }\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "220"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"dc-YoUEqJVkddI2QlzeeeWGwHTUFZo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:09:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getAllUsers\": [\n            {\n                \"uuid\": \"645b66e5-e573-43b2-99a8-ddbf88f24b82\",\n                \"name\": \"John Doe\",\n                \"email\": \"john.doe@example.com\"\n            },\n            {\n                \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n                \"name\": \"Diq Test\",\n                \"email\": \"diq.test@godigi.com\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetUser($uuid: UUID!) {\n  getUser(uuid: $uuid) {\n    uuid\n    name\n    email\n    createdAt\n    updatedAt\n    posts {\n      uuid\n      title\n      status\n    }\n  }\n}",
+								"variables": "{\n  \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetUser($uuid: UUID!) {\n  getUser(uuid: $uuid) {\n    uuid\n    name\n    email\n    createdAt\n    updatedAt\n    posts {\n      uuid\n      title\n      status\n    }\n  }\n}",
+										"variables": "{\n  \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "372"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"174-QCYP4vHblxwjnGf47ixSLRyZ4xM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:30:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getUser\": {\n            \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\",\n            \"name\": \"Diq Test\",\n            \"email\": \"diq.test@godigi.com\",\n            \"createdAt\": \"1749017893625\",\n            \"updatedAt\": \"1749017893625\",\n            \"posts\": [\n                {\n                    \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n                    \"title\": \"My Second Blog Post\",\n                    \"status\": \"DRAFT\"\n                },\n                {\n                    \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n                    \"title\": \"My First Blog Post\",\n                    \"status\": \"DRAFT\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateUser($uuid: UUID!, $input: UpdateUserInput!) {\n  updateUser(uuid: $uuid, input: $input) {\n    uuid\n    name\n    email\n    updatedAt\n  }\n}",
+								"variables": "{\n  \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n  \"input\": {\n    \"name\": \"M Shiddiq F\",\n    \"email\": \"shiddiq@example.com\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation UpdateUser($uuid: UUID!, $input: UpdateUserInput!) {\n  updateUser(uuid: $uuid, input: $input) {\n    uuid\n    name\n    email\n    updatedAt\n  }\n}",
+										"variables": "{\n  \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n  \"input\": {\n    \"name\": \"M Shiddiq F\",\n    \"email\": \"shiddiq@example.com\"\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "151"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"97-tcMNmM1KTjB/yEAWtyPpcNqjyP4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:17:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"updateUser\": {\n            \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\",\n            \"name\": \"M Shiddiq F\",\n            \"email\": \"shiddiq@example.com\",\n            \"updatedAt\": \"1749017851489\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteUser($uuid: UUID!) {\n  deleteUser(uuid: $uuid)\n}",
+								"variables": "{\n  \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation DeleteUser($uuid: UUID!) {\n  deleteUser(uuid: $uuid)\n}",
+										"variables": "{\n  \"uuid\": \"919f7744-03ba-4d37-9c83-2861976726d3\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64-tkx0a/SxCXtChgqXF35IGsZZekc\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:19:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"deleteUser\": \"User with UUID 919f7744-03ba-4d37-9c83-2861976726d3 successfully deleted.\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreatePost($input: CreatePostInput!) {\n  createPost(input: $input) {\n    uuid\n    title\n    subtitle\n    image\n    content\n    status\n    createdAt\n    author {\n      uuid\n      name\n    }\n  }\n}",
+								"variables": "{\n  \"input\": {\n    \"title\": \"My First Blog Post\",\n    \"subtitle\": \"An exciting journey into GraphQL\",\n    \"image\": \"https://example.com/image.jpg\",\n    \"content\": \"This is the main content of the post. It's very informative.\",\n    \"status\": \"DRAFT\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation CreatePost($input: CreatePostInput!) {\n  createPost(input: $input) {\n    uuid\n    title\n    subtitle\n    image\n    content\n    status\n    createdAt\n    author {\n      uuid\n      name\n    }\n  }\n}",
+										"variables": "{\n  \"input\": {\n    \"title\": \"My First Blog Post\",\n    \"subtitle\": \"An exciting journey into GraphQL\",\n    \"image\": \"https://example.com/image.jpg\",\n    \"content\": \"This is the main content of the post. It's very informative.\",\n    \"status\": \"DRAFT\"\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "391"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"187-tAlXleyZXCehmSsTI73tJghO9dA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:23:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"createPost\": {\n            \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n            \"title\": \"My First Blog Post\",\n            \"subtitle\": \"An exciting journey into GraphQL\",\n            \"image\": \"https://example.com/image.jpg\",\n            \"content\": \"This is the main content of the post. It's very informative.\",\n            \"status\": \"DRAFT\",\n            \"createdAt\": \"2025-06-04T06:23:27.020Z\",\n            \"author\": {\n                \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\",\n                \"name\": \"Diq Test\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetAllPosts($skip: Int, $take: Int, $orderBy: String) {\n  getAllPosts(skip: $skip, take: $take, orderBy: $orderBy) {\n    uuid\n    title\n    subtitle\n    status\n    createdAt\n    author {\n      uuid\n      name\n    }\n  }\n}",
+								"variables": "{\n  \"skip\": 0,   \n  \"take\": 10,\n  \"orderBy\": \"createdAt_DESC\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetAllPosts($skip: Int, $take: Int, $orderBy: String) {\n  getAllPosts(skip: $skip, take: $take, orderBy: $orderBy) {\n    uuid\n    title\n    subtitle\n    status\n    createdAt\n    author {\n      uuid\n      name\n    }\n  }\n}",
+										"variables": "{\n  \"skip\": 0,   \n  \"take\": 10,\n  \"orderBy\": \"createdAt_DESC\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "536"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"218-pzt7U4z7x2QITeGRLXoFiNHBBkA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:26:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getAllPosts\": [\n            {\n                \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n                \"title\": \"My Second Blog Post\",\n                \"subtitle\": \"An exciting journey into GraphQL\",\n                \"status\": \"DRAFT\",\n                \"createdAt\": \"2025-06-04T06:26:51.041Z\",\n                \"author\": {\n                    \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\",\n                    \"name\": \"Diq Test\"\n                }\n            },\n            {\n                \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n                \"title\": \"My First Blog Post\",\n                \"subtitle\": \"An exciting journey into GraphQL\",\n                \"status\": \"DRAFT\",\n                \"createdAt\": \"2025-06-04T06:23:27.020Z\",\n                \"author\": {\n                    \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\",\n                    \"name\": \"Diq Test\"\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post by UUID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetPost($uuid: UUID!) {\n  getPost(uuid: $uuid) {\n    uuid\n    title\n    subtitle\n    image\n    content\n    status\n    createdAt\n    updatedAt\n    author {\n      uuid\n      name\n      email\n    }\n  }\n}",
+								"variables": "{\n  \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetPost($uuid: UUID!) {\n  getPost(uuid: $uuid) {\n    uuid\n    title\n    subtitle\n    image\n    content\n    status\n    createdAt\n    updatedAt\n    author {\n      uuid\n      name\n      email\n    }\n  }\n}",
+										"variables": "{\n  \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c9-JwfzIK1SQdq5VU+kzs1z93y3y/k\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:33:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getPost\": {\n            \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n            \"title\": \"My First Blog Post\",\n            \"subtitle\": \"An exciting journey into GraphQL\",\n            \"image\": \"https://example.com/image.jpg\",\n            \"content\": \"This is the main content of the post. It's very informative.\",\n            \"status\": \"DRAFT\",\n            \"createdAt\": \"2025-06-04T06:23:27.020Z\",\n            \"updatedAt\": \"2025-06-04T06:23:27.020Z\",\n            \"author\": {\n                \"uuid\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\",\n                \"name\": \"Diq Test\",\n                \"email\": \"diq.test@godigi.com\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post by Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetPostsByUser($authorId: UUID!) {\n  getPostsByUser(authorId: $authorId) {\n    uuid\n    title\n    status\n    createdAt\n  }\n}",
+								"variables": "{\n  \"authorId\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetPostsByUser($authorId: UUID!) {\n  getPostsByUser(authorId: $authorId) {\n    uuid\n    title\n    status\n    createdAt\n  }\n}",
+										"variables": "{\n  \"authorId\": \"87be4681-e98a-4d97-a26b-4cd794bdcebe\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "297"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"129-YfX/zenncadsfAUJXqQs80mLWRw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:28:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getPostsByUser\": [\n            {\n                \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n                \"title\": \"My Second Blog Post\",\n                \"status\": \"DRAFT\",\n                \"createdAt\": \"2025-06-04T06:26:51.041Z\"\n            },\n            {\n                \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n                \"title\": \"My First Blog Post\",\n                \"status\": \"DRAFT\",\n                \"createdAt\": \"2025-06-04T06:23:27.020Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post by Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetPostsByStatus($status: PostStatus!) {\n  getPostsByStatus(status: $status) {\n    uuid\n    title\n    createdAt\n    author {\n      name\n    }\n  }\n}",
+								"variables": "{\n  \"status\": \"DRAFT\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query GetPostsByStatus($status: PostStatus!) {\n  getPostsByStatus(status: $status) {\n    uuid\n    title\n    createdAt\n    author {\n      name\n    }\n  }\n}",
+										"variables": "{\n  \"status\": \"DRAFT\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "323"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"143-4QPhZ3HjfzLqZztlnDg2EQiBw1Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:29:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getPostsByStatus\": [\n            {\n                \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n                \"title\": \"My Second Blog Post\",\n                \"createdAt\": \"2025-06-04T06:26:51.041Z\",\n                \"author\": {\n                    \"name\": \"Diq Test\"\n                }\n            },\n            {\n                \"uuid\": \"ee2cf76e-c6ff-414d-b8da-0a1cc4da6538\",\n                \"title\": \"My First Blog Post\",\n                \"createdAt\": \"2025-06-04T06:23:27.020Z\",\n                \"author\": {\n                    \"name\": \"Diq Test\"\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdatePost($uuid: UUID!, $input: UpdatePostInput!) {\n  updatePost(uuid: $uuid, input: $input) {\n    uuid\n    title\n    subtitle\n    content\n    status\n    updatedAt\n  }\n}",
+								"variables": "{\n  \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n  \"input\": {\n    \"title\": \"My Updated Blog Post Title\",\n    \"content\": \"The content has been revised and improved.\",\n    \"status\": \"PUBLISHED\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation UpdatePost($uuid: UUID!, $input: UpdatePostInput!) {\n  updatePost(uuid: $uuid, input: $input) {\n    uuid\n    title\n    subtitle\n    content\n    status\n    updatedAt\n  }\n}",
+										"variables": "{\n  \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n  \"input\": {\n    \"title\": \"My Updated Blog Post Title\",\n    \"content\": \"The content has been revised and improved.\",\n    \"status\": \"PUBLISHED\"\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "270"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10e-iiDnYvDDNPTwcYI1XwMRK42Cww4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:32:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"updatePost\": {\n            \"uuid\": \"04b0f3f6-73d1-424f-987a-bef25f13b2d3\",\n            \"title\": \"My Updated Blog Post Title\",\n            \"subtitle\": \"An exciting journey into GraphQL\",\n            \"content\": \"The content has been revised and improved.\",\n            \"status\": \"PUBLISHED\",\n            \"updatedAt\": \"2025-06-04T06:32:02.015Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeletePost($uuid: UUID!) {\n  deletePost(uuid: $uuid)\n}",
+								"variables": "{\n  \"uuid\": \"f1e2d3c4-b5a6-7890-fedc-ba9876543210\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation DeletePost($uuid: UUID!) {\n  deletePost(uuid: $uuid)\n}",
+										"variables": "{\n  \"uuid\": \"65ae6606-ead9-407b-8584-700054050d05\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url}}",
+									"host": [
+										"{{url}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64-2BivLJOceqsaZim4TynFuAa2Ml4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Jun 2025 06:33:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"deletePost\": \"Post with UUID 65ae6606-ead9-407b-8584-700054050d05 successfully deleted.\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:4000/graphql",
+			"type": "string"
+		},
+		{
+			"key": "bearer",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4N2JlNDY4MS1lOThhLTRkOTctYTI2Yi00Y2Q3OTRiZGNlYmUiLCJlbWFpbCI6ImRpcS50ZXN0QGdvZGlnaS5jb20iLCJpYXQiOjE3NDkwMTgxNTUsImV4cCI6MTc0OTAyMTc1NX0.ToNlM_L5W6wiqUkCF-BxwQY4TBt4pT_kShlhTcY_mRo",
+			"type": "string"
+		}
+	]
+}
