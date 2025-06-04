@@ -1,34 +1,36 @@
 {
   "name": "express-apollo-graphql",
   "version": "1.0.0",
-  "description": "A GraphQL API with Express, Apollo, JWT, and MariaDB",
+  "description": "A GraphQL API with Express, Apollo, JWT, Prisma, and MariaDB",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [
     "express",
     "apollo",
     "graphql",
     "jwt",
-    "mariadb"
+    "prisma"
   ],
   "author": "mas-diq",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.9.0",
     "apollo-server-express": "^3.x.x",
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.x.x",
     "express": "^4.x.x",
     "graphql": "^16.x.x",
     "jsonwebtoken": "^9.x.x",
-    "mariadb": "^3.x.x",
-    "mysql2": "^3.x.x",
-    "sequelize": "^6.x.x",
     "uuid": "^9.x.x"
   },
   "devDependencies": {
-    "nodemon": "^3.x.x"
+    "nodemon": "^3.x.x",
+    "prisma": "^6.9.0"
   }
 }

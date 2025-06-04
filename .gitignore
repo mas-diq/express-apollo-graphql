@@ -3,3 +3,9 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+
+# Prisma
+prisma/migrations/
+# prisma/dev.db # If you were to use SQLite for local dev, not needed for MariaDB only
+# prisma/dev.db-journal # If using SQLite
+# prisma/schema.prisma.bkp # Prisma backup file

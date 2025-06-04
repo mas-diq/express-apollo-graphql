@@ -1,13 +1,15 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  scalar UUID # Custom scalar for UUID
+  scalar UUID # Custom scalar for UUID (optional with Prisma, but good for clarity)
 
   type User {
     uuid: UUID!
     name: String!
     email: String!
-    posts: [Post!] # Posts created by this user
+    posts: [Post!]
+    createdAt: String!
+    updatedAt: String!
   }
 
   type Post {
@@ -17,8 +19,9 @@ const typeDefs = gql`
     image: String
     content: String!
     status: PostStatus!
-    createdBy: User! # The user who created the post
-    createdAt: String! # Typically ISO 8601 date string
+    author: User! # Changed from createdBy for clarity, relates to authorId
+    authorId: UUID! # Expose authorId
+    createdAt: String!
     updatedAt: String!
   }
 
@@ -28,17 +31,15 @@ const typeDefs = gql`
     ARCHIVED
   }
 
-  # INPUT TYPES
   input CreateUserInput {
     name: String!
     email: String!
-    password: String! # Min length 8 for example
+    password: String!
   }
 
   input UpdateUserInput {
     name: String
     email: String
-    # password changes should likely be a separate mutation
   }
 
   input CreatePostInput {
@@ -57,36 +58,29 @@ const typeDefs = gql`
     status: PostStatus
   }
 
-  # QUERIES
   type Query {
-    # User Queries
     getAllUsers: [User!]
     getUser(uuid: UUID!): User
-
-    # Post Queries
-    getAllPosts: [Post!]
+    getAllPosts(skip: Int, take: Int, orderBy: String): [Post!] # Added pagination/ordering example
     getPost(uuid: UUID!): Post
-    getPostsByUser(userUuid: UUID!): [Post!]
+    getPostsByUser(authorId: UUID!): [Post!]
     getPostsByStatus(status: PostStatus!): [Post!]
   }
 
-  # MUTATIONS
   type AuthPayload {
     token: String!
     user: User!
   }
 
   type Mutation {
-    # User Mutations
-    registerUser(input: CreateUserInput!): AuthPayload! # Returns token and user
+    registerUser(input: CreateUserInput!): AuthPayload!
     loginUser(email: String!, password: String!): AuthPayload!
     updateUser(uuid: UUID!, input: UpdateUserInput!): User # Protected
-    deleteUser(uuid: UUID!): String # Protected, returns a confirmation message
+    deleteUser(uuid: UUID!): String # Protected
 
-    # Post Mutations
     createPost(input: CreatePostInput!): Post # Protected
     updatePost(uuid: UUID!, input: UpdatePostInput!): Post # Protected
-    deletePost(uuid: UUID!): String # Protected, returns a confirmation message
+    deletePost(uuid: UUID!): String # Protected
   }
 `;
 
