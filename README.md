@@ -1,11 +1,11 @@
-# Project Title: [Express-Apollo-Graphql] - GraphQL API with Prisma
+# Express-Apollo-Graphql - GraphQL API with Prisma
 
 A robust GraphQL API built with Express.js, Apollo Server, JWT for authentication, Prisma ORM, and MariaDB as the database. This API provides CRUD operations for users and posts.
 
 ---
 
 ## Table of Contents
-- [Project Title: \[Express-Apollo-Graphql\] - GraphQL API with Prisma](#project-title-express-apollo-graphql---graphql-api-with-prisma)
+- [Express-Apollo-Graphql - GraphQL API with Prisma](#express-apollo-graphql---graphql-api-with-prisma)
   - [Table of Contents](#table-of-contents)
   - [Tech Stack 🛠️](#tech-stack-️)
   - [Prerequisites 📋](#prerequisites-)
