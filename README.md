@@ -1,11 +1,11 @@
-# Project Title: [Your Project Name] - GraphQL API with Prisma
+# Project Title: [Express-Apollo-Graphql] - GraphQL API with Prisma
 
 A robust GraphQL API built with Express.js, Apollo Server, JWT for authentication, Prisma ORM, and MariaDB as the database. This API provides CRUD operations for users and posts.
 
 ---
 
 ## Table of Contents
-- [Project Title: \[Your Project Name\] - GraphQL API with Prisma](#project-title-your-project-name---graphql-api-with-prisma)
+- [Project Title: \[Express-Apollo-Graphql\] - GraphQL API with Prisma](#project-title-express-apollo-graphql---graphql-api-with-prisma)
   - [Table of Contents](#table-of-contents)
   - [Tech Stack 🛠️](#tech-stack-️)
   - [Prerequisites 📋](#prerequisites-)
@@ -45,8 +45,8 @@ A robust GraphQL API built with Express.js, Apollo Server, JWT for authenticatio
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repository-url>
-    cd your-project-name-prisma
+    git clone http://github.com/mas-diq/express-apollo-graphql
+    cd express-apollo-graphql
     ```
 
 2.  **Install dependencies:**
